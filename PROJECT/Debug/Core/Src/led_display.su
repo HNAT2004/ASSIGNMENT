@@ -1,0 +1,7 @@
+led_display.c:8:6:DisplayREDX	8	static
+led_display.c:14:6:DisplayYELLOWX	8	static
+led_display.c:20:6:DisplayGREENX	8	static
+led_display.c:26:6:DisplayREDY	8	static
+led_display.c:32:6:DisplayYELLOWY	8	static
+led_display.c:38:6:DisplayGREENY	8	static
+led_display.c:62:6:InitLED	8	static

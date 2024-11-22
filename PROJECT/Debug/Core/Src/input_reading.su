@@ -1,0 +1,9 @@
+input_reading.c:23:6:Button1Run	4	static
+input_reading.c:26:5:ProcessButton1	4	static
+input_reading.c:33:6:Button2Run	4	static
+input_reading.c:36:5:ProcessButton2	4	static
+input_reading.c:43:6:Button3Run	4	static
+input_reading.c:46:5:ProcessButton3	4	static
+input_reading.c:53:8:button_reading	16	static
+input_reading.c:100:15:is_button_pressed	16	static
+input_reading.c:104:15:is_button_pressed_1s	16	static
