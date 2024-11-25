@@ -8,6 +8,7 @@
 #include "fsm_automatic.h"
 #include "input_processing.h"
 #include "main.h"
+#include "i2c-lcd.h"
 int DisplayCounter = 0;
 int mode2_flag = 0;
 int mode3_flag = 0;
@@ -91,60 +92,37 @@ void ChangeModeY(void){
 		InitLED();
 	}
 }
-//void fsm_clock(void){
-//	if(timer_flag[2] == 1){
-//		number_clock1--;
-//		setTimer(2, 1000);
-//	}
-//	if(timer_flag[3] == 1){
-//		number_clock2--;
-//		setTimer(3, 1000);
-//	}
-//	if(timer_flag[6] == 1){
-//		if(DisplayCounter == 0){
-//			Display7Seg(number_clock2/10);
-//		}
-//		else if(DisplayCounter == 1){
-//			Display7Seg(number_clock2%10);
-//		}
-//		else if(DisplayCounter == 2){
-//
-//			Display7Seg(number_clock1/10);
-//		}
-//		else if(DisplayCounter == 3){
-//			Display7Seg(number_clock1%10);
-//
-//		}
-//		Display(DisplayCounter);
-//		DisplayCounter++;
-//		if(DisplayCounter > 4){
-//			DisplayCounter = 0;
-//		}
-//		setTimer(6, 100);
-//	}
-//}
-//void fsm_mode(void){
-//	if(timer_flag[6] == 1){
-//		Display(DisplayCounter);
-//		if(DisplayCounter == 0){
-//			Display7Seg(0);
-//		}
-//		else if(DisplayCounter == 1){
-//			Display7Seg(counterMode);
-//		}
-//		else if(DisplayCounter == 2){
-//			Display7Seg(counterTimeSet/10);
-//		}
-//		else if(DisplayCounter == 3){
-//			Display7Seg(counterTimeSet%10);
-//		}
-//		DisplayCounter++;
-//		if(DisplayCounter > 4){
-//			DisplayCounter = 0;
-//		}
-//		setTimer(6, 100);
-//	}
-//}
+void fsm_clock(void){
+	if(timer_flag[2] == 1){
+		number_clock1--;
+		number_clock2--;
+		setTimer(2, 1000);
+	}
+	if(timer_flag[3] == 1){
+		char* stry = "Road x: ";
+		char* strx = "Road y: ";
+		strx += number_clock2;
+		stry += number_clock1;
+		lcd_goto_XY(1, 0);
+		lcd_send_string(strx);
+		lcd_goto_XY(2, 0);
+		lcd_send_string(stry);
+		setTimer(3, 1000);
+	}
+}
+void fsm_mode(void){
+	if(timer_flag[6] == 1){
+		char* stry = "Mode: ";
+		char* strx = "Time: ";
+		strx += counterMode;
+		stry += counterTimeSet;
+		lcd_goto_XY(1, 0);
+		lcd_send_string(strx);
+		lcd_goto_XY(2, 0);
+		lcd_send_string(stry);
+		setTimer(6, 100);
+	}
+}
 void fsm_automatic_runx(){
 	switch(statusx){
 	case INIT:
@@ -155,7 +133,7 @@ void fsm_automatic_runx(){
 		break;
 	case AUTO_RED:
 		DisplayREDX();
-//		fsm_clock();
+		fsm_clock();
 		SetMode();
 		ChangeModeX();
 		if(timer_flag[0] == 1){
@@ -167,7 +145,7 @@ void fsm_automatic_runx(){
 		break;
 	case AUTO_GREEN:
 		DisplayGREENX();
-//		fsm_clock();
+		fsm_clock();
 		SetMode();
 		ChangeModeX();
 		if(timer_flag[0] == 1){
@@ -179,7 +157,7 @@ void fsm_automatic_runx(){
 		break;
 	case AUTO_YELLOW:
 		DisplayYELLOWX();
-//		fsm_clock();
+		fsm_clock();
 		SetMode();
 		ChangeModeX();
 		if(timer_flag[0] == 1){

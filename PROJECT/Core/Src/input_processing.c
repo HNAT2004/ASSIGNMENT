@@ -35,7 +35,6 @@ void fsm_for_input_processing1(void){
 			else{
 				if(is_button_pressed_1s(0) == 1){
 					buttonState1 = BUTTON_PRESSED_MORE_THAN_1_SECOND;
-
 				}
 			}
 		break;

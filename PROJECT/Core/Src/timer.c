@@ -6,8 +6,8 @@
  */
 #include "main.h"
 #include "timer.h"
-//#include "input_reading.h"
-#define MAX_COUNTER 10
+#include "input_reading.h"
+
 int TIME_CYCLE = 10;
 int timer_counter[MAX_COUNTER];
 int timer_flag[MAX_COUNTER];
@@ -28,7 +28,7 @@ void timerRun(void){
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if(htim -> Instance == TIM2){
-		button_reading() ;
+		button_reading();
 		timerRun();
 	}
 }
