@@ -9,6 +9,7 @@
 #include "input_processing.h"
 #include "main.h"
 #include "i2c-lcd.h"
+#include "stdio.h"
 int DisplayCounter = 0;
 int mode2_flag = 0;
 int mode3_flag = 0;
@@ -92,36 +93,37 @@ void ChangeModeY(void){
 		InitLED();
 	}
 }
-void fsm_clock(void){
-	if(timer_flag[2] == 1){
-		number_clock1--;
-		number_clock2--;
-		setTimer(2, 1000);
-	}
-	if(timer_flag[3] == 1){
-		char* stry = "Road x: ";
-		char* strx = "Road y: ";
-		strx += number_clock2;
-		stry += number_clock1;
-		lcd_goto_XY(1, 0);
-		lcd_send_string(strx);
-		lcd_goto_XY(2, 0);
-		lcd_send_string(stry);
-		setTimer(3, 1000);
-	}
+void fsm_clock(void) {
+    if (timer_flag[2] == 1) {
+        number_clock1--;
+        number_clock2--;
+        setTimer(2, 1000);
+    }
+    if (timer_flag[3] == 1) {
+        char stry[16];
+        char strx[16];
+        sprintf(strx, "Road x: %d ", number_clock1);
+        sprintf(stry, "Road y: %d ", number_clock2);
+        lcd_goto_XY(1, 0);
+        lcd_send_string(strx);
+        lcd_goto_XY(2, 0);
+        lcd_send_string(stry);
+        setTimer(3, 1000);
+    }
 }
-void fsm_mode(void){
-	if(timer_flag[6] == 1){
-		char* stry = "Mode: ";
-		char* strx = "Time: ";
-		strx += counterMode;
-		stry += counterTimeSet;
-		lcd_goto_XY(1, 0);
-		lcd_send_string(strx);
-		lcd_goto_XY(2, 0);
-		lcd_send_string(stry);
-		setTimer(6, 100);
-	}
+
+void fsm_mode(void) {
+    if (timer_flag[6] == 1) {
+        char stry[16];
+        char strx[16];
+        sprintf(stry, "Time:   %d ", counterTimeSet);
+        sprintf(strx, "Mode:   %d ", counterMode);
+        lcd_goto_XY(1, 0);
+        lcd_send_string(strx);
+        lcd_goto_XY(2, 0);
+        lcd_send_string(stry);
+        setTimer(6, 100);
+    }
 }
 void fsm_automatic_runx(){
 	switch(statusx){

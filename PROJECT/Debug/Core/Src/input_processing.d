@@ -26,7 +26,8 @@ Core/Src/input_processing.o: ../Core/Src/input_processing.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  ../Core/Inc/led_display.h ../Core/Inc/input_reading.h \
- ../Core/Inc/global.h ../Core/Inc/input_reading.h ../Core/Inc/timer.h
+ ../Core/Inc/global.h ../Core/Inc/input_reading.h ../Core/Inc/timer.h \
+ ../Core/Inc/i2c-lcd.h
 
 ../Core/Inc/main.h:
 
@@ -91,3 +92,5 @@ Core/Src/input_processing.o: ../Core/Src/input_processing.c \
 ../Core/Inc/input_reading.h:
 
 ../Core/Inc/timer.h:
+
+../Core/Inc/i2c-lcd.h:

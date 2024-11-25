@@ -8,6 +8,7 @@
 #include "led_display.h"
 #include "input_reading.h"
 #include "global.h"
+#include "i2c-lcd.h"
 enum ButtonState { BUTTON_RELEASED, BUTTON_PRESSED, BUTTON_PRESSED_MORE_THAN_1_SECOND};
 enum ButtonState buttonState1 = BUTTON_RELEASED;
 enum ButtonState buttonState2 = BUTTON_RELEASED;
@@ -20,6 +21,7 @@ void fsm_for_input_processing1(void){
 			if(is_button_pressed(0)){
 				buttonState1 = BUTTON_PRESSED ;
 				if(ProcessButton1() == 1){
+
 					  counterMode++;
 					  counterTimeSet = 0;
 					  if(counterMode > 4){

@@ -25,6 +25,8 @@
 #include "input_processing.h"
 #include "fsm_automatic.h"
 #include "timer.h"
+#include "i2c-lcd.h"
+#include "fsm_manual.h"
 //#include "fsm_manual.h"
 /* USER CODE END Includes */
 
@@ -101,6 +103,7 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
+  lcd_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -117,8 +120,8 @@ int main(void)
   {
   fsm_automatic_runx();
   fsm_automatic_runy();
-//  fsm_manual_run1();
-//  fsm_manual_run2();
+  fsm_manual_run1();
+  fsm_manual_run2();
   fsm_for_input_processing1();
   fsm_for_input_processing2();
   fsm_for_input_processing3();
