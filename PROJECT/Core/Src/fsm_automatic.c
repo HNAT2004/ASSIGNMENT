@@ -102,8 +102,8 @@ void fsm_clock(void) {
     if (timer_flag[3] == 1) {
         char stry[16];
         char strx[16];
-        sprintf(strx, "Road x: %d ", number_clock1);
-        sprintf(stry, "Road y: %d ", number_clock2);
+        sprintf(strx, "Road X: %d ", number_clock1);
+        sprintf(stry, "Road Y: %d ", number_clock2);
         lcd_goto_XY(1, 0);
         lcd_send_string(strx);
         lcd_goto_XY(2, 0);
