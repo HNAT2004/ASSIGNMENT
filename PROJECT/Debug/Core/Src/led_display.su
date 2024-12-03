@@ -11,3 +11,11 @@ led_display.c:89:6:DisplayMAN_GREENX	8	static
 led_display.c:105:6:DisplayMAN_GREENY	8	static
 led_display.c:121:6:DisplayMAN_YELLOWX	8	static
 led_display.c:137:6:DisplayMAN_YELLOWY	8	static
+led_display.c:153:6:WalkingX	8	static
+led_display.c:157:6:StopX	8	static
+led_display.c:161:6:WalkingY	8	static
+led_display.c:165:6:StopY	8	static
+led_display.c:169:6:TurnOff_WalkingX	8	static
+led_display.c:173:6:TurnOff_WalkingY	8	static
+led_display.c:177:6:WalkingX_Blinking	8	static
+led_display.c:193:6:WalkingY_Blinnking	8	static

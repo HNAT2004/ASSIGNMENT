@@ -15,11 +15,45 @@ int mode2_flag = 0;
 int mode3_flag = 0;
 int mode4_flag = 0;
 int save_counterTimeSet = 0;
-int Time_red = 5;
-int Time_green = 3;
+int Time_red = 8;
+int Time_green = 6;
 int Time_yellow = 2;
 void SetMode(void){
 	if(ProcessButton3() == 1){
+		if(counterMode == 1){
+//			if(statusx == AUTO_RED && statusy == AUTO_GREEN){
+				char stry[16];
+				char strx[16];
+				sprintf(stry, "  Manual Mode ");
+				sprintf(strx, "          ");
+				lcd_goto_XY(1, 0);
+				lcd_send_string(strx);
+				lcd_goto_XY(2, 0);
+				lcd_send_string(stry);
+				statusx = MANUAL_REDX_GREENY;
+				statusy = MANUAL_REDX_GREENY;
+				counterMode = 1;
+				InitLED();
+//			}
+//			else if(statusx == AUTO_RED && statusy == AUTO_YELLOW){
+//				statusx = MANUAL_REDX_YELLOWY;
+//				statusy = MANUAL_REDX_GREENY;
+//				counterMode = 1;
+//				InitLED();
+//			}
+//			else if(statusx == AUTO_GREEN && statusy == AUTO_RED){
+//				statusx = MANUAL_GREENX_REDY;
+//				statusy = MANUAL_REDX_GREENY;
+//				counterMode = 1;
+//				InitLED();
+//			}
+//			else if(statusx == AUTO_YELLOW && statusy == AUTO_RED){
+//				statusx = MANUAL_YELLOWX_REDY;
+//				statusy = MANUAL_REDX_GREENY;
+//				counterMode = 1;
+//				InitLED();
+//			}
+		}
 		if(counterMode == 2){
 			Time_red = counterTimeSet;
 			if(Time_red <= Time_green || Time_red <= Time_yellow){
@@ -102,8 +136,8 @@ void fsm_clock(void) {
     if (timer_flag[3] == 1) {
         char stry[16];
         char strx[16];
-        sprintf(strx, "Road X: %d ", number_clock1);
-        sprintf(stry, "Road Y: %d ", number_clock2);
+        sprintf(strx, "Road X: %d    ", number_clock1);
+        sprintf(stry, "Road Y: %d    ", number_clock2);
         lcd_goto_XY(1, 0);
         lcd_send_string(strx);
         lcd_goto_XY(2, 0);
@@ -111,7 +145,6 @@ void fsm_clock(void) {
         setTimer(3, 1000);
     }
 }
-
 void fsm_mode(void) {
     if (timer_flag[6] == 1) {
         char stry[16];
@@ -138,6 +171,15 @@ void fsm_automatic_runx(){
 		fsm_clock();
 		SetMode();
 		ChangeModeX();
+		if(statusy == AUTO_YELLOW && number_clock2 <= 3){
+			if(timer_flag[4] == 1){
+				WalkingX_Blinking();
+				setTimer(4, 250);
+			}
+		}
+		else{
+			WalkingX();
+		}
 		if(timer_flag[0] == 1){
 			InitLED();
 			statusx = AUTO_GREEN;
@@ -149,6 +191,7 @@ void fsm_automatic_runx(){
 		DisplayGREENX();
 		fsm_clock();
 		SetMode();
+		StopX();
 		ChangeModeX();
 		if(timer_flag[0] == 1){
 			InitLED();
@@ -186,6 +229,15 @@ void fsm_automatic_runy(){
 		DisplayREDY();
 		SetMode();
 		ChangeModeY();
+		if(statusx == AUTO_YELLOW && number_clock1 <= 3){
+			if(timer_flag[4] == 1){
+				WalkingY_Blinnking();
+				setTimer(4, 250);
+			}
+		}
+		else{
+			WalkingY();
+		}
 		if(mode2_flag == 1){
 			InitLED();
 			statusy = MAN_RED;
@@ -201,6 +253,7 @@ void fsm_automatic_runy(){
 		break;
 	case AUTO_GREEN:
 		DisplayGREENY();
+		StopY();
 		SetMode();
 		ChangeModeY();
 		if(mode3_flag == 1){

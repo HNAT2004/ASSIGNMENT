@@ -7,6 +7,7 @@
 C_SRCS += \
 ../Core/Src/fsm_automatic.c \
 ../Core/Src/fsm_manual.c \
+../Core/Src/fsm_manual_mode.c \
 ../Core/Src/global.c \
 ../Core/Src/i2c-lcd.c \
 ../Core/Src/input_processing.c \
@@ -23,6 +24,7 @@ C_SRCS += \
 OBJS += \
 ./Core/Src/fsm_automatic.o \
 ./Core/Src/fsm_manual.o \
+./Core/Src/fsm_manual_mode.o \
 ./Core/Src/global.o \
 ./Core/Src/i2c-lcd.o \
 ./Core/Src/input_processing.o \
@@ -39,6 +41,7 @@ OBJS += \
 C_DEPS += \
 ./Core/Src/fsm_automatic.d \
 ./Core/Src/fsm_manual.d \
+./Core/Src/fsm_manual_mode.d \
 ./Core/Src/global.d \
 ./Core/Src/i2c-lcd.d \
 ./Core/Src/input_processing.d \

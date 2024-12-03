@@ -17,7 +17,10 @@
 #define MAN_RED 5
 #define MAN_GREEN 6
 #define MAN_YELLOW 7
-
+#define MANUAL_REDX_GREENY 8
+#define MANUAL_REDX_YELLOWY 9
+#define MANUAL_GREENX_REDY 10
+#define MANUAL_YELLOWX_REDY 11
 
 extern int statusx;
 extern int statusy;

@@ -27,6 +27,7 @@
 #include "timer.h"
 #include "i2c-lcd.h"
 #include "fsm_manual.h"
+#include "fsm_manual_mode.h"
 //#include "fsm_manual.h"
 /* USER CODE END Includes */
 
@@ -118,6 +119,7 @@ int main(void)
   setTimer(5, 500);
   while (1)
   {
+  fsm_manual_run();
   fsm_automatic_runx();
   fsm_automatic_runy();
   fsm_manual_run1();
@@ -299,11 +301,11 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LD2_Pin|LEDY1_A_Pin|LEDY1_B_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, WALK_Xa_Pin|LD2_Pin|LEDY1_A_Pin|LEDY1_B_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, LEDX2_B_Pin|LEDX1_A_Pin|LEDX2_A_Pin|LEDX1_B_Pin
-                          |LEDY2_B_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, WALK_Xb_Pin|WALK_Ya_Pin|WALK_Yb_Pin|LEDX2_B_Pin
+                          |LEDX1_A_Pin|LEDX2_A_Pin|LEDX1_B_Pin|LEDY2_B_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LEDY2_A_GPIO_Port, LEDY2_A_Pin, GPIO_PIN_RESET);
@@ -314,35 +316,23 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(Button3_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : Button4_Pin */
-  GPIO_InitStruct.Pin = Button4_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(Button4_GPIO_Port, &GPIO_InitStruct);
-
   /*Configure GPIO pins : Button1_Pin Button2_Pin */
   GPIO_InitStruct.Pin = Button1_Pin|Button2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LD2_Pin LEDY1_A_Pin LEDY1_B_Pin */
-  GPIO_InitStruct.Pin = LD2_Pin|LEDY1_A_Pin|LEDY1_B_Pin;
+  /*Configure GPIO pins : WALK_Xa_Pin LD2_Pin LEDY1_A_Pin LEDY1_B_Pin */
+  GPIO_InitStruct.Pin = WALK_Xa_Pin|LD2_Pin|LEDY1_A_Pin|LEDY1_B_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : Button3B0_Pin */
-  GPIO_InitStruct.Pin = Button3B0_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(Button3B0_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : LEDX2_B_Pin LEDX1_A_Pin LEDX2_A_Pin LEDX1_B_Pin
-                           LEDY2_B_Pin */
-  GPIO_InitStruct.Pin = LEDX2_B_Pin|LEDX1_A_Pin|LEDX2_A_Pin|LEDX1_B_Pin
-                          |LEDY2_B_Pin;
+  /*Configure GPIO pins : WALK_Xb_Pin WALK_Ya_Pin WALK_Yb_Pin LEDX2_B_Pin
+                           LEDX1_A_Pin LEDX2_A_Pin LEDX1_B_Pin LEDY2_B_Pin */
+  GPIO_InitStruct.Pin = WALK_Xb_Pin|WALK_Ya_Pin|WALK_Yb_Pin|LEDX2_B_Pin
+                          |LEDX1_A_Pin|LEDX2_A_Pin|LEDX1_B_Pin|LEDY2_B_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

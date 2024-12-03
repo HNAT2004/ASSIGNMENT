@@ -1,5 +1,6 @@
 "./Core/Src/fsm_automatic.o"
 "./Core/Src/fsm_manual.o"
+"./Core/Src/fsm_manual_mode.o"
 "./Core/Src/global.o"
 "./Core/Src/i2c-lcd.o"
 "./Core/Src/input_processing.o"
